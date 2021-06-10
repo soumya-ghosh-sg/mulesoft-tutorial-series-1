@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:java="http://www.mulesoft.org/schema/mule/java" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="6d2be1b1-8b3c-4ed3-8fbe-9cd437977105" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="static-projectFlow" doc:id="c35b2cae-ed20-4455-adf0-74e8025446d5" >
+		<http:listener doc:name="/GET concat" doc:id="0db06785-a901-474b-adec-ad2043f874df" config-ref="HTTP_Listener_config" path="/concat"/>
+		<java:invoke-static method="concat(String,String,String)" doc:name="Invoke static" doc:id="70915f80-4391-40ee-904d-c0241596b498" class="com.sg.StringOps">
+			<java:args ><![CDATA[#[%dw 2.0
+output application/java
+---
+{
+	a: attributes.queryParams.firstname as String,
+	b: attributes.queryParams.middlename as String,
+	c: attributes.queryParams.lastname as String
+}]]]></java:args>
+		</java:invoke-static>
+	</flow>
+	<flow name="non-static-projectFlow" doc:id="5cabe21f-08f3-4567-a1b2-d3fff3f8e19a" >
+		<http:listener doc:name="Listener" doc:id="e830444d-aecb-446e-b0a4-1ca953b4c416" config-ref="HTTP_Listener_config" path="/nonstatic"/>
+		<java:new constructor="StringOps()" doc:name="New" doc:id="6209fddd-744b-4202-bf94-acdf0e5e69a6" class="com.sg.StringOps" target="str_obj"/>
+		<java:invoke doc:name="Invoke" doc:id="cff5f67c-18ee-47fb-aa7a-9222bd2d62ea" instance="#[output application/java
+---
+vars.str_obj]" class="com.sg.StringOps" method="multiConcat(String, String, String, String, String)">
+			<java:args ><![CDATA[#[%dw 2.0
+output application/java
+---
+{
+	a: attributes.queryParams.city1 as String,
+	b: attributes.queryParams.city2 as String,
+	c: attributes.queryParams.city3 as String,
+	d: attributes.queryParams.city4 as String,
+	e: attributes.queryParams.city5 as String
+}]]]></java:args>
+		</java:invoke>
+		<logger level="INFO" doc:name="Logger" doc:id="4b64ec97-d5f8-4590-bbd8-d45eb486491f" message="#[payload]"/>
+	</flow>
+</mule>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="8aafdabf-90b6-4a51-8b2f-6807a75da350" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="errorFlow" doc:id="fbd170e6-a63b-4672-ae79-2d369cbaeb28" >
+		<http:listener doc:name="/GET error" doc:id="0d1aa1e6-1c70-466d-aa82-21f810ceab95" config-ref="HTTP_Listener_config" path="/error"/>
+		<logger level="INFO" doc:name="Logger" doc:id="1cbcf322-09fd-49c3-b85e-56a5d189e8b7" message="**Before throwing Error **"/>
+		<raise-error doc:name="Raise error" doc:id="a68de423-c7a4-48d6-ae7b-5d79b1a37fa8" type="MULE:VALIDATION" description="Validation Error"/>
+		<logger level="INFO" doc:name="Logger" doc:id="2143b516-ab76-44c7-aeb9-dda4c5d1cba1" message="**Error main flow invoked **"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="686bd161-cb01-4985-8fe3-df179fadbf3b" when="false">
+				<logger level="INFO" doc:name="Logger" doc:id="b707754a-3ca6-42b4-9c06-bee0d588a830" message="**On Error Propagate Logger 1**"/>
+				<logger level="INFO" doc:name="Logger" doc:id="1bbe1181-32a3-4a4a-8b97-36378a0c17b6" message="**On Error Propagate Logger 2**"/>
+			</on-error-propagate>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="7d194c2d-ee28-40ea-98d8-e0a03e92992d" >
+				<logger level="INFO" doc:name="Logger" doc:id="cab96542-8bc5-468b-af1b-7b7567090045" message="**On Error Continue Logger 1**"/>
+				<logger level="INFO" doc:name="Logger" doc:id="1c6ec9fe-cf40-4f6f-977b-e9f1a41b2651" message="**On Error Continue Logger 2**"/>
+			</on-error-continue>
+		</error-handler>
+	</flow>
+</mule>

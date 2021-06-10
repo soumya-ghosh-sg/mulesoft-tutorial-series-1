@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="015ff741-6e43-4add-85ee-8fb99fe9d1d2" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="SetVarFlow" doc:id="49b5e1ad-9eab-4c33-9d24-4c28b2d2875d" >
+		<http:listener doc:name="/Get setVariable" doc:id="ed07ddea-69d3-4ae4-8916-21e2e4f784d1" path="/setVariable" config-ref="HTTP_Listener_config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="34f009fc-e49a-42db-9c24-67f41c358251" message="**demo setvar got invoked**"/>
+		<set-variable value="10" doc:name="Set Variable" doc:id="5afc1924-1f54-42fc-ad53-3651efaa176a" variableName="vartest1"/>
+		<logger level="INFO" doc:name="Logger" doc:id="daebc244-aff2-48e7-b457-0ae48bc1c5b8" message="#[vars.vartest1]"/>
+	</flow>
+</mule>

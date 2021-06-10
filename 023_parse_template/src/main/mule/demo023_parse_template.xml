@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="7087509a-32eb-427c-857d-97dc984a0752" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="demo023_parse_templateFlow" doc:id="526fc72a-3cf9-4885-80e3-2532f54f44e6" >
+		<http:listener doc:name="/POST parse" doc:id="a4704b40-71b0-4178-8c6e-29f382f0c7d9" config-ref="HTTP_Listener_config" path="/parse" allowedMethods="POST"/>
+		<parse-template doc:name="Parse Template" doc:id="3d7afa3b-08cb-4b53-9274-9d021969fe2b" >
+			<content >&lt;html&gt;
+	&lt;body&gt;
+		&lt;table border=&quot;1&quot;&gt;
+			&lt;tr&gt;
+				&lt;th&gt;Name&lt;/th&gt;
+				&lt;th&gt;ID&lt;/th&gt;
+				&lt;th&gt;Email Id&lt;/th&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;#[payload.empname]&lt;/td&gt;
+				&lt;td&gt;#[payload.empid]&lt;/td&gt;
+				&lt;td&gt;#[payload.empemail]&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/table&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</content>
+		</parse-template>
+	</flow>
+</mule>

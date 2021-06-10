@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="73d304d7-5a7e-42e1-bf84-d78e39c05481" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<os:object-store name="SG_Object_store" doc:name="Object store" doc:id="13625545-0e39-4125-b8ca-c4ef76a27ee1" />
+	<flow name="storeFlow" doc:id="66e7f5c3-b6ab-4089-8aa5-077893d710cd" >
+		<http:listener doc:name="/GET store" doc:id="c5408ba1-e728-40b1-9bba-f9cdd48eb5ce" config-ref="HTTP_Listener_config" path="/store"/>
+		<set-variable value="#[attributes.queryParams.key]" doc:name="Set Variable" doc:id="a7cf1a06-bd80-47a6-8e78-df0d2788b67d" variableName="key"/>
+		<set-variable value="#[attributes.queryParams.value]" doc:name="Set Variable" doc:id="d32aa3f8-5abb-49e4-8de3-9299eaeab062" variableName="value"/>
+		<os:store doc:name="Store" doc:id="d137da7d-1bf2-4e47-8b3e-66f132f57851" key="#[vars.key]" objectStore="SG_Object_store">
+			<os:value ><![CDATA[#[vars.value]]]></os:value>
+		</os:store>
+	</flow>
+	<flow name="retrieveFlow" doc:id="e40d61b0-9819-442f-8346-9cf5346ed289" >
+		<http:listener doc:name="/GET retreive" doc:id="faae101f-1478-4659-afb8-5cda7a0dc1b5" config-ref="HTTP_Listener_config" path="/retrive"/>
+		<set-variable value="#[attributes.queryParams.key]" doc:name="Set Variable" doc:id="4fb67c4c-2e2a-4492-b42a-38e71beac50d" variableName="setvar"/>
+		<os:retrieve doc:name="Retrieve" doc:id="a9aaa4dd-fc70-4a85-8252-1ce11f722f1e" key="#[vars.setvar]" objectStore="SG_Object_store">
+			<os:default-value ><![CDATA[#["Default value"]]]></os:default-value>
+		</os:retrieve>
+		<logger level="INFO" doc:name="Logger" doc:id="2859c4f5-3324-47d0-8cc9-b1846bfa848b" message="#[payload]"/>
+	</flow>
+</mule>

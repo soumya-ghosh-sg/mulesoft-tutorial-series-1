@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c126237f-b312-435f-919a-e04f87da0821" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="4d74e3f7-ff64-49a8-8a8c-7aad5ddc788e">
+		<http:request-connection host="dummy.restapiexample.com" />
+	</http:request-config>
+	<flow name="cloudhubFlow" doc:id="6596b540-b61f-4a26-a7e0-a76c586e2a48" >
+		<http:listener doc:name="/GET employee" doc:id="a50fae8f-dc55-414f-9d4f-c314d4b8cb32" config-ref="HTTP_Listener_config" path="/employee"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8597baa5-8cf9-4f89-99f6-de5287afe518" message="**Cloudhub invoked**"/>
+		<http:request method="GET" doc:name="Invoke Eployee webService" doc:id="53a255e3-7fdd-4274-9a7e-b07c6ef86776" config-ref="HTTP_Request_configuration" path="/api/v1/employees"/>
+		<logger level="INFO" doc:name="Logger" doc:id="1794dcc2-1689-4e32-bf52-dd65a71cd467" message="**Webservice invoked**"/>
+	</flow>
+</mule>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="7ac96e7c-18b1-46af-845a-b09b3d3ad970" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="RoundrobinFlow" doc:id="6526464a-69c2-427b-856a-09ba95b6ec28" >
+		<http:listener doc:name="/GET roundrobin" doc:id="54ef50ae-ba26-4e68-afc4-5535440485fa" config-ref="HTTP_Listener_config" path="/roundrobin"/>
+		<round-robin doc:name="Round Robin" doc:id="d5770404-2744-4935-8665-03ad9db0c20e" >
+			<route >
+				<logger level="INFO" doc:name="Logger" doc:id="6715931a-3cc2-4f4c-9a5a-1829c4b9adb6" message="** Logger 1 invoked **"/>
+			</route>
+			<route >
+				<logger level="INFO" doc:name="Logger" doc:id="73d0c96d-248c-4189-9db3-f9d657f647c9" message="** Logger 2 invoked **"/>
+			</route>
+			<route >
+				<logger level="INFO" doc:name="Logger" doc:id="602a2d9b-2416-412e-9aaa-d20ee4c544c8" message="** Logger 3 invoked **"/>
+			</route>
+		</round-robin>
+	</flow>
+</mule>

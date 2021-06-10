@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="demo029_session_varFlow" doc:id="d0483005-72de-4d36-bf33-79b5d7955e2e" >
+		<http:listener doc:name="Listener" doc:id="88daf880-e6cd-46c1-824c-8cf6a7625a8e" />
+		<set-variable value="hawhaw" doc:name="Set Variable" doc:id="89330d3d-7975-4322-9ca8-5b159bf70073" variableName="sanu_hoho"/>
+	</flow>
+</mule>

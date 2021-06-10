@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="demo027_munit-test-suite.xml" />
+	<munit:test name="demo027_munit-test-suite-Test_munitFlowTest" doc:id="4e293d92-e75e-44f0-b1e5-dd62037e08d2" description="Test">
+		<munit:behavior >
+			<munit:set-event doc:name="Set Event" doc:id="dde3ed5f-2610-480c-bc80-b06c3a0c62e1" >
+				<munit:attributes value="#[{queryParams : {number1:'10', number2:'20'}}]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to Test_munitFlow" doc:id="f0cab37c-161f-4aa3-b5e5-fe93b3bb8945" name="Test_munitFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="1cc4488a-7b10-4881-bf3b-a9426db5dec0" actual="#[payload.body.AddResponse.AddResult]" expected="30" message="Match"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

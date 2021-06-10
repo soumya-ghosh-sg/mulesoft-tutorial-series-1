@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="6c31ed71-fb39-4e0a-96f6-d5b7e03cb446" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="58c39f0f-8522-441f-b20c-3f1dbf1a6b44" >
+		<db:my-sql-connection host="localhost" port="3306" user="mysql" password="mysql" database="world"/>
+	</db:config>
+	<flow name="connectDBFlow" doc:id="04bcd87d-bc75-44fb-acd1-65a68af66f57" >
+		<http:listener doc:name="/GET connctDB" doc:id="8fbee433-e8e5-459c-b865-b46511af1195" config-ref="HTTP_Listener_config" path="/connectDB" allowedMethods="GET"/>
+		<db:select doc:name="Select" doc:id="f5e36bd7-0d81-4475-a96e-539aa6707095" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from city;]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="64c99e36-232e-4fee-a756-d62168daeefe" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<foreach doc:name="For Each" doc:id="6dab50e3-239b-4a76-8158-771cef617be1" >
+			<logger level="INFO" doc:name="Logger" doc:id="c697c85f-a585-4b57-8fe6-93676c9f3d57" message="#[payload.Name]"/>
+		</foreach>
+	</flow>
+</mule>
