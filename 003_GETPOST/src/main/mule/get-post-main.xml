@@ -7,14 +7,14 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="50409e6f-f1dd-4da0-ae51-8952d3bceca1" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-	<flow name="getFlow" doc:id="73f7b347-fe27-4525-8f94-31bc65afe929" >
-		<http:listener doc:name="/GET urlTest flow" doc:id="7d678fb3-2ce0-45d2-956d-28dd45dbe01a" config-ref="HTTP_Listener_config" path="/urltest" allowedMethods="GET"/>
+	<flow name="get-flow" doc:id="73f7b347-fe27-4525-8f94-31bc65afe929" >
+		<http:listener doc:name="/GET urlTest " doc:id="7d678fb3-2ce0-45d2-956d-28dd45dbe01a" config-ref="HTTP_Listener_config" path="/urltest" allowedMethods="GET"/>
 		<logger level="INFO" doc:name="Logger" doc:id="5369809c-6477-482c-8e1d-0210564f3720" message="**GET Logger flow invoked**"/>
-		<set-payload value='{"message":"inside GET Call"}' doc:name="Set Payload" doc:id="e329c528-b003-4c0f-9fbd-97c56c847939" />
+		<set-payload value='{ "message" : "inside GET Call" }' doc:name="Set Payload" doc:id="e329c528-b003-4c0f-9fbd-97c56c847939" />
 	</flow>
-	<flow name="postFlow" doc:id="e236cb37-a836-4740-b6fa-8d89877e63ef" >
-		<http:listener doc:name="/POST urlTest flow" doc:id="467255f9-17c6-4e66-a21d-2276461e1b72" config-ref="HTTP_Listener_config" path="/urltest" allowedMethods="POST"/>
+	<flow name="post-flow" doc:id="e236cb37-a836-4740-b6fa-8d89877e63ef" >
+		<http:listener doc:name="/POST urlTest" doc:id="467255f9-17c6-4e66-a21d-2276461e1b72" config-ref="HTTP_Listener_config" path="/urltest" allowedMethods="POST"/>
 		<logger level="INFO" doc:name="Logger" doc:id="28193422-8d36-4539-867c-8c5a81d31519" message="**POST Logger flow invoked**" />
-		<set-payload value='{"message":"inside POST call"}' doc:name="Set Payload" doc:id="519d3bb8-70d2-4c9b-93dd-f8fb301103a5" />
+		<set-payload value='{ "message" : "inside POST call" }' doc:name="Set Payload" doc:id="519d3bb8-70d2-4c9b-93dd-f8fb301103a5" />
 	</flow>
 </mule>
