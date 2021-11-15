@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/xml-module http://www.mulesoft.org/schema/mu
 	</http:listener-config>
 	<flow name="demo001Flow" doc:id="00295b78-443a-4e0a-b940-bd31866f9035" >
 		<http:listener doc:name="Listener" doc:id="674ccf3e-cba3-4191-8d31-64cc2e78627a" path="/loggerTest" config-ref="HTTP_Listener_config"/>
-		<set-payload value='{ "a":1, "b":2}' doc:name="Set Payload" doc:id="b9dd6372-9c31-4c82-9007-634a47e66b3d" />
+		<set-payload value='{ "id":1, "name":"John Doe"}' doc:name="Set Payload" doc:id="b9dd6372-9c31-4c82-9007-634a47e66b3d" />
 		<logger level="INFO" doc:name="Logger" doc:id="141dfce8-9051-4e84-8966-cb4cd0c8da7e" message='The Payload is #[payload]'/>
 	</flow>
 </mule>
