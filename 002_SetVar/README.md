@@ -1,4 +1,4 @@
-<b># Step-bystep</b><br/>
+<b># Step-by-step</b><br/>
 
 1. Create a new Mule Project
 
