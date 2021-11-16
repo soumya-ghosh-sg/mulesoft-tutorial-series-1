@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="846c2479-5826-44d0-b03c-bd74fb4ab204" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="main-flow" doc:id="8f66a388-9aab-459e-914d-f78e7a48a625" >
+		<http:listener doc:name="/GET flowtest" doc:id="423fd957-2a85-4379-9bb7-ef73fb6675af" config-ref="HTTP_Listener_config" path="/flowtest" allowedMethods="GET"/>
+		<set-variable value='"var1 : main"' doc:name="var1" doc:id="d7ce397f-df55-47ce-a436-8981aee79b73" variableName="var1"/>
+		<logger level="INFO" doc:name="Logger" doc:id="32b1a409-f4f3-4f93-95dc-a67f80729d96" message="#[vars.var1]"/>
+		<flow-ref doc:name="Flow Reference" doc:id="b9d60593-d493-4f96-a77f-55626345a3b5" name="sub-flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="7ec0d576-6693-4824-a068-be316bc81713" message="#[vars.var1]"/>
+	</flow>
+	<flow name="private-flow" doc:id="cae630b0-e82c-4c2a-b708-c18a66b660bc" >
+		<logger level="INFO" doc:name="PrivateFlowLogger" doc:id="732f199c-a6d0-4467-b45b-539c3103a29f" message="**Private flow logger invoked**"/>
+		<logger level="INFO" doc:name="Logger" doc:id="2fa8aa05-687d-4084-bddc-99256239fce7" message="#[vars.var1]"/>
+		<set-variable value='"var1 : private"' doc:name="var1" doc:id="fa24cae1-f9b3-4da7-8dc8-f96866a241f3" variableName="var1"/>
+	</flow>
+	<sub-flow name="sub-flow" doc:id="9bc461f9-8a1d-4dfa-bcdf-63171c468571" >
+		<logger level="INFO" doc:name="Logger" doc:id="25a36287-1118-488a-a1f5-fe7b19f45f41" message="**Sub Flow Logger called**"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8bccbd6d-b7a9-4a94-9ffa-bb876ac47b9e" message="#[vars.var1]"/>
+		<set-variable value='"var1 : sub"' doc:name="var1" doc:id="336f5ebd-e46e-47fc-88ec-ac1380f4bf2f" variableName="var1"/>
+	</sub-flow>
+</mule>
