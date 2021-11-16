@@ -12,10 +12,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<wsc:config name="Web_Service_Consumer_Config" doc:name="Web Service Consumer Config" doc:id="aaa43992-a87e-4425-ab91-27b3a90bda0c" >
 		<wsc:connection wsdlLocation="http://www.dneonline.com/calculator.asmx?wsdl" service="Calculator" port="CalculatorSoap" address="http://www.dneonline.com/calculator.asmx" />
 	</wsc:config>
-	<wsc:config name="Web_Service_Consumer_Config1" doc:name="Web Service Consumer Config" doc:id="6e3cd1fa-b61a-4967-82e8-bbfd495392ef" >
-		<wsc:connection wsdlLocation="http://www.dneonline.com/calculator.asmx?wsdl" service="Calculator" port="CalculatorSoap" address="http://www.dneonline.com/calculator.asmx" />
-	</wsc:config>
-	<flow name="demo006_invokesoapFlow" doc:id="77bfc995-fc38-4bcf-a1a7-a4d6379b461f" >
+	<flow name="invoke-soap-main-flow" doc:id="77bfc995-fc38-4bcf-a1a7-a4d6379b461f" >
 		<http:listener doc:name="Listener" doc:id="0e9b9a8b-4c9f-4a96-a688-13b3c0d379f6" config-ref="HTTP_Listener_config" path="/calculator"/>
 		<set-variable value="#[attributes.queryParams.Num1]" doc:name="Set Variable" doc:id="fbbba543-0d3c-45c2-bda3-173973982e6e" variableName="var1"/>
 		<set-variable value="#[attributes.queryParams.Num2]" doc:name="Set Variable" doc:id="2215de61-19cf-4f22-9a82-1f6406b3a12d" variableName="var2"/>
@@ -34,7 +31,7 @@ ns ns0 http://tempuri.org/type Number = ???
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<wsc:consume doc:name="Consume" doc:id="5a9256ca-a874-4c5a-aee6-add7f6d64840" config-ref="Web_Service_Consumer_Config1" operation="Add"/>
-		<logger level="INFO" doc:name="Logger" doc:id="9fb4831f-b7d3-4763-9181-a72d7d0f79c2" message="#[payload.body.AddResponse.AddResult]"/>
+		<wsc:consume doc:name="Consume" doc:id="5a9256ca-a874-4c5a-aee6-add7f6d64840" config-ref="Web_Service_Consumer_Config" operation="Add"/>
+		<logger level="INFO" doc:name="Logger" doc:id="9fb4831f-b7d3-4763-9181-a72d7d0f79c2" message="Result :: #[payload.body.AddResponse.AddResult]"/>
 	</flow>
 </mule>
