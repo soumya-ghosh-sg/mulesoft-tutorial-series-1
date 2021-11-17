@@ -5,7 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
 	<file:config name="File_Config" doc:name="File Config" doc:id="f57071cf-3ebf-4b73-b7c4-ca6ff28b0a13" />
-	<flow name="FileProcessingFlow" doc:id="2188f2b3-1b67-46e1-b126-e54c67afa0f5" >
+	<flow name="File-Processing-Flow" doc:id="2188f2b3-1b67-46e1-b126-e54c67afa0f5" >
 		<file:listener doc:name="On New or Updated File" doc:id="46d4481f-939d-4b94-9492-184099431ca7" config-ref="File_Config" directory="C:\Soumya\Mule\Practice\input" autoDelete="true" moveToDirectory="C:\Soumya\Mule\Practice\output">
 			<scheduling-strategy >
 				<fixed-frequency frequency="5" timeUnit="SECONDS"/>
