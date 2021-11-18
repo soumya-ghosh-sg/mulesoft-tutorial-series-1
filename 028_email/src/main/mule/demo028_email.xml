@@ -9,7 +9,7 @@ http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/em
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="81d0b9c6-6273-4c38-a66c-8b8620cf3a89" >
-		<email:smtp-connection host="smtp-mail.outlook.com" user="soumya.ghosh.85@outlook.com" password="Newuser@123" port="587">
+		<email:smtp-connection host="smtp-mail.outlook.com" user="******@outlook.com" password="******" port="587">
 			<email:properties >
 				<email:property key="mail.smtp.starttls.enable" value="true" />
 			</email:properties>
@@ -17,10 +17,10 @@ http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/em
 	</email:smtp-config>
 		<flow name="demo028_emailFlow" doc:id="fbc4a6ec-03fa-496a-8e95-01dfef461cbd" >
 		<http:listener doc:name="/GET email" doc:id="cd57cb51-cf3c-4984-a205-72c133acd0ab" config-ref="HTTP_Listener_config" path="/email"/>
-		<email:send doc:name="Send" doc:id="800277e6-fa25-4959-92eb-510203146b21" config-ref="Email_SMTP" fromAddress="soumya.ghosh.85@outlook.com" subject="Test Email">
+		<email:send doc:name="Send" doc:id="800277e6-fa25-4959-92eb-510203146b21" config-ref="Email_SMTP" fromAddress="******" subject="Test Email">
 			<email:to-addresses >
-				<email:to-address value="ecesoumya@gmail.com" />
-				<email:to-address value="unatnas_ghosh@outlook.com" />
+				<email:to-address value="*******" />
+				<email:to-address value="*******" />
 			</email:to-addresses>
 			<email:body >
 				<email:content ><![CDATA[This is a test email. Please ignore.]]></email:content>
