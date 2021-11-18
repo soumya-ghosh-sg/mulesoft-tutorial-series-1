@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<file:config name="File_Config" doc:name="File Config" doc:id="641ddb85-a16c-4c8b-8469-1c512d069d50" >
 		<file:connection workingDir="C:\Soumya\Mule\Practice\output" />
 	</file:config>
-	<flow name="FileProcessingFlow" doc:id="7399b5f9-ed0e-47a2-b5e2-511d66baee18" >
+	<flow name="file-processing-flow" doc:id="7399b5f9-ed0e-47a2-b5e2-511d66baee18" >
 		<file:listener doc:name="On New or Updated File" doc:id="9a090acd-ff1e-4885-8ba6-ad247f8801a1" directory="C:\Soumya\Mule\Practice\input" autoDelete="true" moveToDirectory="C:\Soumya\Mule\Practice\output">
 			<scheduling-strategy >
 				<fixed-frequency frequency="5" timeUnit="SECONDS"/>
