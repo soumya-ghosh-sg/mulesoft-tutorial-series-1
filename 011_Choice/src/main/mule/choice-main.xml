@@ -7,7 +7,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="bcd239c6-6077-4822-9388-366ee9eca13d" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-	<flow name="ChoiceFlow" doc:id="261361a4-73d1-4125-96af-1e4e0682e38a" >
+	<flow name="Choice-Flow" doc:id="261361a4-73d1-4125-96af-1e4e0682e38a" >
 		<http:listener doc:name="/GET choice" doc:id="41712e22-c002-429b-978b-f1b744a08c40" config-ref="HTTP_Listener_config" path="/choice"/>
 		<set-variable value="#[attributes.queryParams.country]" doc:name="Set Variable" doc:id="13ee5f9e-06b6-4c08-940d-edafa26d1525" variableName="countryName"/>
 		<choice doc:name="Choice" doc:id="40e17e81-d3bb-4a0d-b62e-dc4c2b08a46f" >
