@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<flow name="scattergatherdemoFlow" doc:id="6b662e68-b7f3-4472-a095-e3f79921cd8e" >
-		<http:listener doc:name="/Get scatter" doc:id="3ad3fcdd-50ab-42d1-8ff9-07c4d116f169" config-ref="HTTP_Listener_config" path="/scatter"/>
+		<http:listener doc:name="/Get scattergather" doc:id="3ad3fcdd-50ab-42d1-8ff9-07c4d116f169" config-ref="HTTP_Listener_config" path="/scattergather"/>
 		<set-payload value='{"message": "Before Scatter gather"}' doc:name="Set Payload" doc:id="5e1758b4-df63-400d-bf5c-2b31f9f89110" />
 		<logger level="INFO" doc:name="Logger" doc:id="42867175-94da-486d-b4a0-df0a8b332520" message="** Before Scatter Gather**"/>
 		<scatter-gather doc:name="Scatter-Gather" doc:id="40bc2881-3a7b-40cd-bc64-978a40fc5a13" >
