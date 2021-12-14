@@ -6,14 +6,12 @@
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<file:config name="File_Config" doc:name="File Config" doc:id="4b7d7ac9-211f-4b78-bd69-db685dc7a50d" >
-		<file:connection workingDir="C:\Soumya\Mule\Practice" />
-	</file:config>
 	<file:config name="File_Config1" doc:name="File Config" doc:id="1db0a9d0-1e70-49b1-bcea-b24ac3fd9c24" >
-		<file:connection workingDir="C:\Soumya\Mule\Practice\output\batchTest" />
+		<file:connection workingDir="${outputDirectory}" />
 	</file:config>
-	<flow name="BatchFlow" doc:id="48e83c95-df38-495d-b8d4-18e827f16346" >
-		<file:listener doc:name="On New or Updated File" doc:id="3481829c-e6e7-4dac-8933-88682169f4fd" config-ref="File_Config" directory="C:\Soumya\Mule\Practice\input" autoDelete="true" moveToDirectory="C:\Soumya\Mule\Practice\output">
+	<configuration-properties doc:name="Configuration properties" doc:id="154874cc-841b-4d6d-85a2-015a410953c0" file="config.properties" />
+	<flow name="Batch-Processing-Flow" doc:id="48e83c95-df38-495d-b8d4-18e827f16346" >
+		<file:listener doc:name="On New or Updated File" doc:id="3481829c-e6e7-4dac-8933-88682169f4fd" config-ref="File_Config1" directory="${inputDirectory}" autoDelete="true" moveToDirectory="${outputDirectory}">
 			<scheduling-strategy >
 				<fixed-frequency />
 			</scheduling-strategy>
