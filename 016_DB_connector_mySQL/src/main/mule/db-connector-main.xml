@@ -10,9 +10,9 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<db:config name="Database_Config" doc:name="Database Config" doc:id="58c39f0f-8522-441f-b20c-3f1dbf1a6b44" >
-		<db:my-sql-connection host="localhost" port="3306" user="mysql" password="mysql" database="world"/>
+		<db:my-sql-connection host="**host**" port="**port**" user="**user**" password="**password**" database="**database_name**"/>
 	</db:config>
-	<flow name="connectDBFlow" doc:id="04bcd87d-bc75-44fb-acd1-65a68af66f57" >
+	<flow name="db-connector-flow" doc:id="04bcd87d-bc75-44fb-acd1-65a68af66f57" >
 		<http:listener doc:name="/GET connctDB" doc:id="8fbee433-e8e5-459c-b865-b46511af1195" config-ref="HTTP_Listener_config" path="/connectDB" allowedMethods="GET"/>
 		<db:select doc:name="Select" doc:id="f5e36bd7-0d81-4475-a96e-539aa6707095" config-ref="Database_Config">
 			<db:sql ><![CDATA[select * from city;]]></db:sql>
